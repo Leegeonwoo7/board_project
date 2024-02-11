@@ -14,7 +14,7 @@
     </style>
 </head>
 <body>
-<form action="#" id="create_account_form" method="post">
+<form action="makeAccount.jsp" id="create_account_form" method="post">
     <table>
         <tr>
             <th><label for="create_account_name">이름</label></th>
@@ -80,12 +80,12 @@
         <tr>
             <th><label for="create_account_address">주소</label></th>
             <td>
-                <input type="text" name="address-code" id="create_account_address_code">
+                <input type="text" name="address_code" id="create_account_address_code">
                 <!-- 카카오 API 추가-->
                 <input type="button" onclick="checkPost()" value="우편번호검색">
                 <br>
-                <input type="text" name="address-address" id="create_account_address" placeholder="주소"><br>
-                <input type="text" name="address-address-detail" id="create_account_address_detail" placeholder="상세주소"><br>
+                <input type="text" name="address_address" id="create_account_address" placeholder="주소"><br>
+                <input type="text" name="address_address_detail" id="create_account_address_detail" placeholder="상세주소"><br>
             </td>
         </tr>
         <tr>
@@ -137,7 +137,6 @@
                 ,"validate_duplicate_id"
                 ,"width=450 height=150 left=300 top=300");
             isDuplicateChecked = true;
-            alert("중복확인이 완료되었습니다");
         }
     }
 
