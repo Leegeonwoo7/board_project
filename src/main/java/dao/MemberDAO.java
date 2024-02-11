@@ -61,7 +61,9 @@ public class MemberDAO {
     }
 
     public boolean makeAccount(MemberDTO memberDTO){
-        String sql = "INSERT INTO member values(?,?,?,?,?,?,?,?,?,?,sysdate)";
+        String sql = "INSERT INTO member (id, name, password, gender, email, email_addr, phone, address_code, address_address, address_address_detail, logtime)" +
+                "VALUES (?,?,?,?,?,?,?,?,?,?,now())";
+
 
         getConnection();
         try {
@@ -73,9 +75,9 @@ public class MemberDAO {
             pstmt.setString(5, memberDTO.getEmail());
             pstmt.setString(6, memberDTO.getEmailAddr());
             pstmt.setString(7, memberDTO.getPhone());
-            pstmt.setString(8, memberDTO.getAddressCode());
-            pstmt.setString(9, memberDTO.getAddressAddress());
-            pstmt.setString(10, memberDTO.getAddressAddressDetail());
+            pstmt.setString(8, memberDTO.getAddr1());
+            pstmt.setString(9, memberDTO.getAddr2());
+            pstmt.setString(10, memberDTO.getAddr3());
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
