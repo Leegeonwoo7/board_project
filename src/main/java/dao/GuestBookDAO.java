@@ -11,10 +11,10 @@ public class GuestBookDAO {
     private String username = "root";
     private String password = "1234";
 
-    private static MemberDAO memberDAO = new MemberDAO();
-    public static MemberDAO getInstance(){return memberDAO; }
+    private static GuestBookDAO guestBookDAO = new GuestBookDAO();
+    public static GuestBookDAO getInstance(){ return guestBookDAO; }
 
-    public MemberDAO(){
+    public GuestBookDAO(){
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException e) {
