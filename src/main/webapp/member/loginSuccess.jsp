@@ -17,6 +17,6 @@
     <img src="../img/흰둥이.jpeg" width="50" alt="홈으로" onclick="location.href='../index.jsp'">
     <%=name%>님 환영합니다
     <input type="button" id="update_btn" value="회원정보수정" onclick="location.href='updateForm.jsp'">
-    <input type="button" value="로그아웃" onclick="location.href='logout.jsp'">
+    <input type="button" value="로그아웃" onclick="location.href='logOut.jsp'">
 </body>
 </html>
