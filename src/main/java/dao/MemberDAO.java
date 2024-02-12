@@ -2,6 +2,7 @@ package dao;
 
 import bean.MemberDTO;
 
+import java.lang.reflect.Member;
 import java.sql.*;
 
 public class MemberDAO {
@@ -167,5 +168,46 @@ public class MemberDAO {
             }
         }
         return memberDTO;
+    }
+
+    public boolean updateMember(MemberDTO memberDTO){
+        String sql = "UPDATE member " +
+                "SET name=?," +
+                " password=?," +
+                " gender=?," +
+                " email=?," +
+                " email_addr=?," +
+                " phone=?," +
+                " address_code=?," +
+                " address_address=?," +
+                " address_address_detail=?" +
+                "where id = ?";
+        getConnection();
+
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, memberDTO.getName());
+            pstmt.setString(2, memberDTO.getPassword());
+            pstmt.setString(3, memberDTO.getGender());
+            pstmt.setString(4, memberDTO.getEmail());
+            pstmt.setString(5, memberDTO.getEmailAddr());
+            pstmt.setString(6, memberDTO.getPhone());
+            pstmt.setString(7, memberDTO.getAddr1());
+            pstmt.setString(8, memberDTO.getAddr2());
+            pstmt.setString(9, memberDTO.getAddr3());
+            pstmt.setString(10, memberDTO.getId());;
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }finally {
+            try{
+                if(pstmt!=null)pstmt.close();
+                if(conn!=null)conn.close();
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+        }
+        return true;
     }
 }
