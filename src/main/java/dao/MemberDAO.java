@@ -132,4 +132,40 @@ public class MemberDAO {
         }
         return memberDTO;
     }
+
+    public MemberDTO getMemberById(String id){
+        MemberDTO memberDTO = null;
+        String sql = "SELECT * FROM member WHERE id = ?";
+
+        getConnection();
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, id);
+            ResultSet rs = pstmt.executeQuery();
+
+            if(rs.next()){
+                memberDTO = new MemberDTO();
+                memberDTO.setName(rs.getString("name"));
+                memberDTO.setId(rs.getString("id"));
+                memberDTO.setPhone(rs.getString("phone"));
+                memberDTO.setGender(rs.getString("gender"));
+                memberDTO.setEmail(rs.getString("email"));
+                memberDTO.setEmailAddr(rs.getString("email_addr"));
+                memberDTO.setAddr1(rs.getString("address_code"));
+                memberDTO.setAddr2(rs.getString("address_address"));
+                memberDTO.setAddr3(rs.getString("address_address_detail"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try{
+                if(rs!=null) rs.close();
+                if(pstmt!=null) pstmt.close();
+                if(conn!=null) conn.close();
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+        }
+        return memberDTO;
+    }
 }
