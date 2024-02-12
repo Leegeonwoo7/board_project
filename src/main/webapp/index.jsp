@@ -12,7 +12,7 @@
 <%}else{%>
 <h2><a href="member/logOut.jsp">로그아웃</a></h2>
 <h2><a href="member/updateForm.jsp">회원정보수정</a></h2>
-<h2><a href="">게시글 작성</a></h2>
+<h2><a href="board/boardForm.jsp">게시글 작성</a></h2>
 <%}%>
 </body>
 </html>
