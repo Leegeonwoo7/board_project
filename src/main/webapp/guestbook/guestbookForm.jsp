@@ -20,7 +20,7 @@
     </style>
 </head>
 <body>
-    <form action="guestbookWirte.jsp" method="post" id="guestbook_form">
+    <form action="guestbookWrite.jsp" method="post" id="guestbook_form">
         <table>
             <tr>
                 <th><label for="name">작성자</label></th>
