@@ -1,0 +1,17 @@
+CREATE TABLE board(
+    seq INTEGER PRIMARY KEY AUTO_INCREMENT,
+    id VARCHAR(20) NOT NULL ,
+    name VARCHAR(40) NOT NULL,
+    email VARCHAR(40),
+    title VARCHAR(255) NOT NULL,
+    content VARCHAR(4000)NOT NULL,
+
+    ref INTEGER NOT NULL, #그룹번호
+    lev INTEGER DEFAULT 0 NOT NULL , #단계
+    step INTEGER DEFAULT 0 NOT NULL, #글순서
+    pseq INTEGER DEFAULT 0 NOT NULL, #원글번호
+    reply INTEGER DEFAULT 0 NOT NULL, #답변수
+
+    hit INTEGER DEFAULT 0,
+    logtime TIMESTAMP DEFAULT NOW()
+);
