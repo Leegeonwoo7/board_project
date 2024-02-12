@@ -1,5 +1,7 @@
 <%@ page import="dao.BoardDAO" %>
-<%@ page import="bean.BoardDTO" %><%--
+<%@ page import="bean.BoardDTO" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %><%--
   Created by IntelliJ IDEA.
   User: leegeonwoo
   Date: 2/12/24
@@ -15,28 +17,32 @@
     String name = (String)session.getAttribute("memName");
     String email = (String)session.getAttribute("email");
 
-    BoardDTO boardDTO = new BoardDTO();
-    boardDTO.setId(id);
-    boardDTO.setName(name);
-    boardDTO.setEmail(email);
-    boardDTO.setTitle(title);
-    boardDTO.setContent(content);
+    Map<String, String> map =new HashMap<>();
+    map.put("id", id);
+    map.put("name", name);
+    map.put("email",email);
+    map.put("title",title);
+    map.put("content", content);
 
     BoardDAO boardDAO = BoardDAO.getInstance();
-    boolean isComplete = boardDAO.makeBoard(boardDTO);
-
+    boolean isComplete = boardDAO.makeBoard(map);
 %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-<% if (isComplete){ %>
-    게시글을 등록하였습니다.
-<%}else{%>
-    등록에 실패하였습니다. 다시시도하세요
-<%}%>
-
-
+<script>
+    <% if (isComplete){%>
+    window.onload=function (){
+        alert("작성하신 글을 등록하였습니다.");
+        location.href = "boardList.jsp?pg=1";
+    }
+    <%}else{%>
+    window.onload=function () {
+        alert("작성 실패하였습니다 다시시도하세요");
+    }
+    <%}%>
+</script>
 </body>
 </html>
