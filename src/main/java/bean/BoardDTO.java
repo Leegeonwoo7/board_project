@@ -3,6 +3,8 @@ package bean;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Setter
 @Getter
 public class BoardDTO {
@@ -20,4 +22,5 @@ public class BoardDTO {
     private int reply;
 
     private int hit;
+    private Date logtime;
 }
