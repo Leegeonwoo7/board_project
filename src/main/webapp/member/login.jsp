@@ -24,6 +24,7 @@
         session.setAttribute("memName", memberDTO.getName());
         session.setAttribute("memId", id);
         session.setAttribute("eamil", email);
+        session.setMaxInactiveInterval(30 * 60);
         response.sendRedirect("loginSuccess.jsp");
     }
 %>
