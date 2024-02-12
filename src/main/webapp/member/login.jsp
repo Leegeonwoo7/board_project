@@ -14,24 +14,24 @@
     MemberDAO memberDAO = MemberDAO.getInstance();
     MemberDTO memberDTO = memberDAO.login(id,password);
 
+    if (memberDTO == null){
+        response.sendRedirect("loginFail.jsp");
+    }else{
+        String email1 = memberDTO.getEmail();
+        String email2 = memberDTO.getEmailAddr();
+        String email = email1 + "@" + email2;
 
+        session.setAttribute("memName", memberDTO.getName());
+        session.setAttribute("memId", id);
+        session.setAttribute("eamil", email);
+        response.sendRedirect("loginSuccess.jsp");
+    }
 %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-<%if(memberDTO != null){%>
-    <%=memberDTO.getName()%>님 환영합니다<br>
-    <tr>
-        <td colspan="2">
-            <input type="button" onclick="location.href='updateForm.jsp?id=<%=id%>'" value="회원수정">
-            <input type="button" onclick="history.back()" value="뒤로가기">
-        </td>
-    </tr>
-<%}else{%>
-    회원가입에 실패하였습니다 다시 로그인해주세요
-    <input type="button" onclick="history.back()" value="뒤로가기">
-<%}%>
+
 </body>
 </html>
