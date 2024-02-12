@@ -93,4 +93,43 @@ public class MemberDAO {
         }
         return true;
     }
+
+    public MemberDTO login(String id, String password){
+        MemberDTO memberDTO = null;
+        String sql = "select * from member where id=? and password=?";
+
+        getConnection();
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, id);
+            pstmt.setString(2, password);
+            rs = pstmt.executeQuery();
+
+            if(rs.next()){
+                memberDTO = new MemberDTO();
+                memberDTO.setId(rs.getString("id"));
+                memberDTO.setName(rs.getString("name"));
+                memberDTO.setPassword(rs.getString("password"));
+                memberDTO.setGender(rs.getString("gender"));
+                memberDTO.setEmail(rs.getString("email"));
+                memberDTO.setEmailAddr(rs.getString("email_addr"));
+                memberDTO.setPhone(rs.getString("phone"));
+                memberDTO.setAddr1(rs.getString("address_code"));
+                memberDTO.setAddr2(rs.getString("address_address"));
+                memberDTO.setAddr3(rs.getString("address_address_detail"));
+                return memberDTO;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try{
+                if(rs != null) rs.close();
+                if(conn != null) conn.close();
+                if(pstmt != null) pstmt.close();
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+        return memberDTO;
+    }
 }
