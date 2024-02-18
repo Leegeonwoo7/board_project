@@ -132,7 +132,4 @@ public class BoardDAO {
         }
         return totalA;
     }
-
-
-
 }
