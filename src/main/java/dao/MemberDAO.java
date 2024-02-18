@@ -1,27 +1,52 @@
 package dao;
 
 import bean.MemberDTO;
-
-import java.lang.reflect.Member;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.sql.*;
+
+//import java.lang.reflect.Member;
 
 public class MemberDAO {
     private Connection conn;
     private ResultSet rs;
     private PreparedStatement pstmt;
-    private String driver = "com.mysql.cj.jdbc.Driver";
-    private String url = "jdbc:mysql://localhost:3306/board_project";
-    private String username = "root";
-    private String password = "1234";
+//    private String driver = "com.mysql.cj.jdbc.Driver";
+//    private String url = "jdbc:mysql://localhost:3306/board_project";
+//    private String username = "root";
+//    private String password = "1234";
+    private String driver;
+    private String username;
+    private String password;
+    private String url;
+    private String host;
+    private String port;
+//    private String sid;
 
     private static MemberDAO memberDAO = new MemberDAO();
     public static MemberDAO getInstance(){return memberDAO; }
 
     public MemberDAO(){
         try {
+            Reader reader = new InputStreamReader(getClass().getClassLoader().getResourceAsStream("dev.json"), "UTF-8");
+            Gson gson = new Gson();
+            JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
+            JsonObject database = jsonObject.getAsJsonObject("mysql").getAsJsonObject("database");
+            driver = database.get("driver").getAsString();
+            host = database.get("host").getAsString();
+            port = database.get("port").getAsString();
+            username = database.get("username").getAsString();
+            password = database.get("password").getAsString();
+            url = "jdbc:mysql://" + host + ":" + port + "/board_project";
+
             Class.forName(driver);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -32,6 +57,9 @@ public class MemberDAO {
             e.printStackTrace();
         }
     }
+
+    //set
+
 
     public boolean isValidateId(String id){
         boolean validate = false;
